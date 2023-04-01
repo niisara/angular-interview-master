@@ -21,5 +21,46 @@ npm install -g @angular/cli@latest
 | ng generate service <Service Name>     | Add a new service                    |
 
 
-# How to create a standalone component uing CLI command?
+# How to add Tailwind CSS to Angular Application
 
+## 1. Install the needed dependencies
+
+```
+npm install postcss --save-dev
+npm install tailwindcss
+npm install -D @tailwindcss/forms
+npm install -D postcss
+```
+
+If you're relying on npm, postcss does not require manual installation. However, if you do choose to install it yourself, this will help protect against any hoisting issues and make your setup more resistant to future changes.
+
+## 2. Create your configuration file
+
+```
+npx tailwind init
+```
+By entering this command into your terminal, you will generate the `tailwind.config.js` file to store tailwind customizations! This is where you have full control over your design system and can set up any desired Tailwind plugins.
+
+## 3. Configure the location of your HTML and TypeScript files
+
+To ensure that Tailwind can conveniently access these utilities within your project, edit `tailwind.config.js` and substitute its content with this:
+
+```
+module.exports = {
+ content: ['./src/**/*.{html,ts}', './projects/**/*.{html,ts}'],
+ theme: {
+   extend: {},
+ },
+ plugins: [],
+};
+```
+
+## 4. Add Tailwind directives to your global CSS file
+
+Open your global CSS file `(src/style.css)` and add the following content:
+
+```
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
