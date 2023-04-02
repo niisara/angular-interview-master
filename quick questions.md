@@ -21,6 +21,11 @@ npm install -g @angular/cli@latest
 | ng generate service <Service Name>     | Add a new service                    |
 
 
+To construct a component to form part of your module, you should...
+
+1. `ng g module new-module` to generate a module.
+2. `ng g component new-module/new-component` to create NewComponent.
+
 # How to add Tailwind CSS to Angular Application
 
 ## 1. Install the needed dependencies
@@ -30,6 +35,7 @@ npm install postcss --save-dev
 npm install tailwindcss
 npm install -D @tailwindcss/forms
 npm install -D postcss
+npm install -D autoprefixer
 ```
 
 If you're relying on npm, postcss does not require manual installation. However, if you do choose to install it yourself, this will help protect against any hoisting issues and make your setup more resistant to future changes.
@@ -47,12 +53,14 @@ To ensure that Tailwind can conveniently access these utilities within your proj
 
 ```
 module.exports = {
- content: ['./src/**/*.{html,ts}', './projects/**/*.{html,ts}'],
- theme: {
-   extend: {},
- },
- plugins: [],
-};
+  content: ['./src/**/*.{html,ts}', './projects/**/*.{html,scss,ts}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
+}
 ```
 
 ## 4. Add Tailwind directives to your global CSS file
