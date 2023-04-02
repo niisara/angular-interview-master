@@ -72,3 +72,45 @@ Open your global CSS file `(src/style.css)` and add the following content:
 @tailwind components;
 @tailwind utilities;
 ```
+
+# What is forRoot and forChild while defining ngModule ?
+
+When constructing a feature module to be imported into other modules, `forRoot` and `forChild` are essential methods utilized.
+
+**forRoot** is a static method implemented within the root module of an application that provides multiple configurations and services to be used over all other modules. This makes it possible to have global settings, such as language preferences or integrated APIs, across the entire application.
+
+To illustrate, if you have a module which offers a configuration service, then it could be described as follows:
+
+```javascript
+@NgModule({
+  providers: [ConfigService]
+})
+export class ConfigModule {
+  static forRoot(config: Config): ModuleWithProviders<ConfigModule> {
+    return {
+      ngModule: ConfigModule,
+      providers: [
+        { provide: Config, useValue: config }
+      ]
+    };
+  }
+}
+```
+
+Once the module is imported into your application's codebase, you can call `forRoot` to supply the necessary configuration.
+
+```javascript
+@NgModule({
+  imports: [
+    ConfigModule.forRoot({ apiUrl: 'https://api.example.com' })
+  ]
+})
+export class AppModule {}
+```
+
+In contrast, **forChild** is used when you want to import a module into a feature module. This method is similar to forRoot, but it does not generate a new module. Instead, it produces an NgModule object which holds the provided configuration - this can then be imported into any feature module.
+
+Overall, `forRoot` and `forChild` are useful methods for defining modules that can be imported into other modules and providing configuration options and services that are used throughout an application.
+
+The `forRoot` and `forChild` methods are useful when it comes to constructing modules that provides configuration options and services that are used across the application.
+

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
@@ -9,4 +9,11 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ]
 })
-export class AppCommonModule { }
+export class AppCommonModule { 
+  static forRoot(): ModuleWithProviders<AppCommonModule> {
+    return {
+        ngModule: AppCommonModule,
+        providers: [AppAuthService, AppRouteGuard],
+    };
+}
+}
