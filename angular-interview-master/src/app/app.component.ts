@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppConsts } from './shared/app-const';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   sideMenu: boolean = false;
+  config: string = AppConsts.remoteServiceBaseUrl
 }

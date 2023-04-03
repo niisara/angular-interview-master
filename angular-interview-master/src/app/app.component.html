@@ -1,3 +1,4 @@
+
 <!--
   This example requires some changes to your config:
   
@@ -20,7 +21,9 @@
   <body class="h-full">
   ```
 -->
+
 <div class="min-h-full">
+  
   <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
   <div *ngIf="sideMenu" class="relative z-40 lg:hidden" role="dialog" aria-modal="true">
     <!--
@@ -523,7 +526,7 @@
                   aria-label="Pagination">
                   <div class="hidden sm:block">
                     <p class="text-sm text-gray-700">
-                      Showing
+                      {{config}}
                       <span class="font-medium">1</span>
                       to
                       <span class="font-medium">10</span>

@@ -1,3 +1,87 @@
+# What is Routing Guard
+Route Guard tells the router whether or not it should allow navigation to a requested route. There are five different types of guards like `CanActivate`, `CanActivateChild`, `CanDeactivate`, `CanLoad`, `Resolve` and each of them is called in a particular sequence. Depending on the guard selected, the router's behavior will alter dramatically. 
+
+These five guards include:
+
+1. `CanActivate`: Check if a user has access and returns either true or false value.
+2. `CanActivateChild`: Check if a user has access to any of the child routes and returns either true or false value.
+3. `CanDeactivate`: Can a user can leave a page and returns either true or false value.
+4. `CanLoad`: Grab data before the route is instantiated and returns either true or false value.
+5. `Resolve`: Check if a user has access and returns either true or false value.
+
+### Example:
+
+```javascript
+import { Injectable } from '@angular/core';
+import { Router, CanActivate } from '@angular/router';
+import { AuthService } from './auth.service';
+
+@Injectable()
+export class AuthGuardService implements CanActivate {
+ constructor(public auth: AuthService, public router: Router) {}
+ canActivate(): boolean {
+  if (!this.auth.isAuthenticated()) {
+   this.router.navigate(['login']);
+   return false;
+  }
+  return true;
+ }
+}
+
+const routes: Routes = [
+  {
+   path: 'artist/:artistId',
+   component: ArtistComponent,
+   canActivate: [AlwaysAuthGuard]
+  }
+];
+```
+
+**Warning: Starting with version 15.2, the use of guard injectable services will be discouraged and eventually eliminated in version 17.**
+
+### The new way:
+
+```javascript
+import { Injectable } from '@angular/core';
+import { Router} from '@angular/router';
+import { AuthService } from './auth.service';
+
+@Injectable()
+export class AuthGuardService {
+constructor(public auth: AuthService, public router: Router) {}
+
+canActivate(): boolean {
+  if (!this.auth.isAuthenticated()) {
+   this.router.navigate(['login']);
+   return false;
+  }
+  return true;
+ }
+}
+
+export const canActivate = (authGuardService = inject(AuthGuardService )) => permissionService.canActivate();
+export const APP_ROUTES: [{
+ path: 'artist/:artistId', 
+ component: ArtistComponent, 
+ canActivate: [() => canActivate(true)]
+ }]
+```
+
+#  What is a Module, and what does it contain?  
+
+Angular modules are the essential components of an app, consisting of directives, services, and components. An application can contain multiple modules.
+
+By utilizing the @NgModule decorator, we can create a module of our own.
+
+```javascript
+@NgModule({
+  imports:      [ BrowserModule ],
+  declarations: [ AppComponent ],
+  bootstrap:    [ AppComponent ]
+})
+export class AppModule { }
+```
+
 # How to update angular version
 
 To ensure your global angular-cli package is up to date, simply run this command:
@@ -114,3 +198,15 @@ Overall, `forRoot` and `forChild` are useful methods for defining modules that c
 
 The `forRoot` and `forChild` methods are useful when it comes to constructing modules that provides configuration options and services that are used across the application.
 
+# How to define multiple environment for Angular development
+
+Angular relies on separate environment files to manage various settings for distinct circumstances such as a development, staging or production environment. These documents are helpful in specifying values for variables that apply to the certain environment like API endpoints, database qualifications and other configuration details.
+
+Based on the build target, such as `ng build` for development or `ng build --prod for production`, Angular automatically chooses the environment file to guarantee your application runs optimally on its respective environment.
+
+When it comes to the production environment, you should always prioritize performance and security. To do this, enable features like Ahead-of-Time compilation, tree shaking and minification to improve your application's speed as well as HTTPS and other security features to protect user data. These will also reduce the size of your application while still ensuring optimal functionality!
+
+
+# What is AOT and JIT compilation
+
+# What do you understand by treeshaking

@@ -1,0 +1,5 @@
+{
+    "remoteServiceBaseUrl": "https://test.com",
+    "appBaseUrl": "http://localhost:4200",
+    "isLocalizationEnabled": false
+}
