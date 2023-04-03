@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AppConsts } from 'src/app/shared/app-const';
-import { XmlHttpRequestHelper } from 'src/app/shared/helpers/xml-http-request-helper';
-import { LocalStorageService } from 'src/app/shared/utils/local-storage.service';
+import { AppConsts } from '@app/shared/app-const';
+import { XmlHttpRequestHelper } from '@app/shared/helpers/xml-http-request-helper';
+import { LocalStorageService } from '@app/shared/utils/local-storage.service';
 
 @Injectable()
 export class AppAuthService {

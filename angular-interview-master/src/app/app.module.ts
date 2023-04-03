@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AppCommonModule } from './app-shared/app-common/app-common.module';
 import { PlatformLocation } from '@angular/common';
 import { AppConsts } from './shared/app-const';
-import { AppPreBootstrap } from 'src/AppPreBootstrap';
+import { AppPreBootstrap } from 'AppPreBootstrap';
 
 
 function getBaseHref(platformLocation: PlatformLocation): string {

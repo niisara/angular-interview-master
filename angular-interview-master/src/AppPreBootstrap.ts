@@ -26,8 +26,6 @@ export class AppPreBootstrap {
 
         XmlHttpRequestHelper.ajax(type, url, customHeaders, null, (result: any) => {
             AppConsts.remoteServiceBaseUrl = result.remoteServiceBaseUrl;
-            console.log('------------------------->', AppConsts.remoteServiceBaseUrl)
-
             callback();
         });
     }
